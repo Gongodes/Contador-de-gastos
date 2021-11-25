@@ -1,0 +1,20 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "h2"
+        },
+        "th:object": {
+            "context": "form"
+        },
+        "th:inline": {
+            "context": "script"
+        },
+        "th:each": {
+            "context": "tr"
+        },
+        "th:href": {
+            "context": "a"
+        }
+    }
+}

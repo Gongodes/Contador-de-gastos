@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Mi saldo</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body  class="container  bg-dark">
+    <div  class="container bg-transparent">
+
+
+
+
+
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+
+
+            <!-- WELCOME-->
+            <section class="welcome p-t-10 bg-flat-color-3">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-12 bg-flat-color-3">
+                            <h1 class="title-4">Bienvenido otra vez
+                                <span>Usuario!</span>
+                            </h1>
+                            <b>  <p class="fecha">
+                                <script>
+                                    var mydate = new Date()
+                                    var year = mydate.getYear()
+                                    if (year < 1000)
+                                        year += 1900
+                                    var day = mydate.getDay()
+                                    var month = mydate.getMonth()
+                                    var daym = mydate.getDate()
+                                    if (daym < 10)
+                                        daym = "0" + daym
+                                    var dayarray = new Array
+                                        ("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado")
+                                    var montharray = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+                                        "Septiembre", "Octubre", "Noviembre", "Diciembre")
+                                    document.write("Hoy es " + " " + dayarray[day] + " " + daym + " de " + montharray[month]
+                                        + " de " + year)
+                                </script>
+                                </p></b>
+                            <hr class="line-seprate">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END WELCOME-->
+
+
+            <div class="card">
+
+                <div class="card-body bg-flat-color-2">
+                    <div class="card-title">
+                        <h3 class="text-center title-2">Registra un gasto/ingreso</h3>
+                    </div>
+                    <hr>
+                    <form th:action="@{/ingreso}" th:object="${gastos}" method="post" >
+                        <div class="form-group">
+                            <label for="cc-payment" class="control-label mb-1"><b>Monto</b></label>
+                            <input max="100000000" id="cc-pament" name="cantidad" type="number" class="form-control"
+                           required     >
+                        </div>
+                        <div class="form-group has-success">
+                            <label  class="control-label mb-1"><b>Tipo</b></label>
+                            <div class="input-group">
+
+
+
+
+                                <select class="form-control" name="tipgasting" id="tipoConsulta">
+                                    <option value="Gasto">Gasto</option>
+                                    <option value="Ingreso">Ingreso</option>
+                                    
+                                </select>
+
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detalle" class="control-label mb-1"><b>Detalle</b></label>
+                            <input id="detalle" name="detalle" type="text"
+                                class="form-control cc-number identified visa" maxlength="23"  required>
+                                
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="cc-exp" class="control-label mb-1"><b>Fecha</b></label>
+                                    <input id="datePicker" name="fecha" type="date" class="form-control cc-exp" value="" required
+                                       >
+                                    
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                        <div>
+                            <button id="payment-button" type="submit" class="btn btn-lg btn-warning btn-block">
+                                <i class="fa fa-usd"></i>&nbsp;
+                                <span id="payment-button-amount">Ingresar</span>
+                                
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- STATISTIC-->
+            <section  class="statistic statistic2">
+                <div  class="">
+                    <div style="text-align: center;" >
+                        <div >
+                            <div class="statistic__item statistic__item--green">
+                                <h2  th:text="'$' + ${totalgan}"  class="number"></h2>
+                                <span class="desc">Ganancias</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div >
+                            <div class="statistic__item statistic__item--red">
+                                <h2 th:text="'$' + ${totalgas}"  class="number"></h2>
+                                <span class="desc">Gastos</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div >
+                            <div style="background-color: #00cccc" class="statistic__item statistic__item--red">
+                                <h2 th:text="'$' + ${totaltot}"  class="number"></h2>
+                                <span class="desc">Total</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END STATISTIC-->
+
+            <!-- STATISTIC CHART-->
+            <section class="statistic-chart">
+                <div  class="container bg-primary">
+                    <div class="row ">
+                        <div  class="col-md-12 ">
+                            <h3 style="color: white" class="title-5 m-b-35">Estadisticas</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  class="col-md-6 col-lg-4">
+                            <!-- CHART-->
+                            <div style="min-height: 435px;" class="statistic-chart-1">
+                                <h3 class="title-3 m-b-30">Meses Ingreso de gastos </h3>
+                                <div class="chart-wrap">
+                                    <canvas id="widgetChart5"></canvas>
+                                </div>
+                                <div class="statistic-chart-1-note">
+                                    <span th:text="'$' + ${totalano}"  class="big"></span>
+                                    <span>/ total gastos por año</span>
+                                </div>
+                            </div>
+                            <!-- END CHART-->
+                        </div>
+                        <div class="col-md-6 col-lg-4 ">
+                            <!-- TOP CAMPAIGN-->
+                            <div style="min-height: 435px;"  class="top-campaign ">
+                                <h3 class="title-3 m-b-30">Top Gastos</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-top-campaign">
+                                        <tbody>
+                                            <tr th:each="top:${top}" >
+                                                <td th:text="${top.detalle}" ></td>
+                                                <td th:text="${top.cantidad}" ></td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- END TOP CAMPAIGN-->
+                        </div>
+                        <div  class="col-md-6 col-lg-4">
+                            <!-- CHART PERCENT-->
+                            <div   class="chart-percent-2">
+                                <h3 class="title-3 m-b-30">grafico por %</h3>
+                                <div class="chart-wrap">
+                                    <canvas style="min-height: 80px;" id="percent-chart2"></canvas>
+                                    <div id="chartjs-tooltip">
+                                        <table></table>
+                                    </div>
+                                </div>
+                                <div class="chart-info">
+                                    <div class="chart-note">
+                                        <span class="dot dot--green"></span>
+                                        <span>ganancias</span>
+                                    </div>
+                                    <div class="chart-note">
+                                        <span class="dot dot--red"></span>
+                                        <span>gastos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END CHART PERCENT-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END STATISTIC CHART-->
+
+            <!-- DATA TABLE-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 style="color: white" class="title-5 m-b-35">tabla de datos</h3>
+                            <div class="table-data__tool">
+                                
+                                
+                                
+                                <div class="table-data__tool-right">
+                                    
+                                  
+                                </div>
+                            </div>
+                            
+                              
+                            <div  class="table-responsive table-responsive-data2 bg-flat-color-3">
+                                <a th:href="@{/borrartodo}"  onclick="return confirm('esto borrara todo, ¿esta seguro?');">  <button class="btn btn-danger">Reset año</button></a>
+                                <table  class="table table-data2">
+                                    <thead >
+                                        <tr >
+                                            
+                                            
+                                            
+                                            <th style="color: white">descripcion</th>
+                                            <th style="color: white">fecha</th>
+                                            <th style="color: white">tipo</th>
+                                            <th style="color: white">monto</th>
+                                            <th style="color: white">Borrar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="all:${all}" class="tr-shadow">
+                                            
+                                            
+                                            
+                                            <td th:text="${all.detalle}" class="desc"></td>
+                                            <td th:text="${all.fecha}"></td>
+                                            <td>
+                                                <span th:text="${all.tipgasting}" class="status--process"></span>
+                                            </td>
+                                            <td th:text="${all.cantidad}"></td>
+                                            <td > 
+                                                <div  class="table-data-feature ">
+                                                    
+                                                  
+                                                  <a th:href="@{'/borrar/{id}'(id=${all.id})}">   <button  class="item" data-toggle="tooltip" data-placement="top"
+                                                        title="Delete">
+                                                       <i class="zmdi zmdi-delete"></i>
+                                                      </button></a>
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                           
+                                            
+                                           
+                                           
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END DATA TABLE-->
+
+
+        </div>
+
+   
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    
+  
+        
+        
+    
+    
+    <!-- Main JS-->
+    <script th:inline="javascript"> document.getElementById('datePicker').valueAsDate = new Date(); (function ($) {
+  // USE STRICT
+  "use strict";
+    
+        
+   let ene = [[${ene}]];
+   
+   let feb = [[${feb}]];
+   
+   let mar = [[${mar}]];
+   
+   let abr = [[${abr}]];
+   
+   let may = [[${may}]];
+   
+   let jun = [[${jun}]];
+   
+   let jul = [[${jul}]];
+   
+   let ago = [[${ago}]];
+   
+   let sep = [[${sep}]];
+   
+   let oct = [[${oct}]];
+   
+   let nov = [[${nov}]];
+   
+   
+        
+        
+   let dic = [[${dic}]];
+      
+
+  try {
+    //WidgetChart 5
+    var ctx = document.getElementById("widgetChart5");
+    if (ctx) {
+      ctx.height = 220;
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+          datasets: [
+            {
+              
+              data: [ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic],
+              borderColor: "transparent",
+              borderWidth: "0",
+              backgroundColor: "red",
+            }
+          ]
+        },
+        options: {
+          maintainAspectRatio: true,
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: false,
+              categoryPercentage: 1,
+              barPercentage: 0.65
+            }],
+            yAxes: [{
+              display: false
+            }]
+          }
+        }
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+
+    // Percent Chart 2
+    
+    let porgan = [[${porgan}]];
+    let porper = [[${porper}]];
+    
+    var ctx = document.getElementById("percent-chart2");
+    if (ctx) {
+      ctx.height = 209;
+      var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [
+            {
+              label: "My First dataset",
+              data: [porgan, porper],
+              backgroundColor: [
+                '#00ad5f',
+                '#fa4251'
+              ],
+              hoverBackgroundColor: [
+                '#00ad5f',
+                '#fa4251'
+              ],
+              borderWidth: [
+                0, 0
+              ],
+              hoverBorderColor: [
+                'transparent',
+                'transparent'
+              ]
+            }
+          ],
+          labels: [
+            'Ganancias',
+            'Gastos'
+          ]
+        },
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          cutoutPercentage: 87,
+          animation: {
+            animateScale: true,
+            animateRotate: true
+          },
+          legend: {
+            display: false,
+            position: 'bottom',
+            labels: {
+              fontSize: 14,
+              fontFamily: "Poppins,sans-serif"
+            }
+
+          },
+          tooltips: {
+            titleFontFamily: "Poppins",
+            xPadding: 15,
+            yPadding: 10,
+            caretPadding: 0,
+            bodyFontSize: 16,
+          }
+        }
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+
+ 
+
+  
+
+
+  
+
+
+
+  
+
+  
+
+  
+
+})(jQuery);
+
+
+
+(function ($) {
+    // USE STRICT
+    "use strict";
+    var navbars = ['header', 'aside'];
+    var hrefSelector = 'a:not([target="_blank"]):not([href^="#"]):not([class^="chosen-single"])';
+    var linkElement = navbars.map(element => element + ' ' + hrefSelector).join(', ');
+    $(".animsition").animsition({
+      inClass: 'fade-in',
+      outClass: 'fade-out',
+      inDuration: 900,
+      outDuration: 900,
+      linkElement: linkElement,
+      loading: true,
+      loadingParentElement: 'html',
+      loadingClass: 'page-loader',
+      loadingInner: '<div class="page-loader__spin"></div>',
+      timeout: false,
+      timeoutCountdown: 5000,
+      onLoadEvent: true,
+      browser: ['animation-duration', '-webkit-animation-duration'],
+      overlay: false,
+      overlayClass: 'animsition-overlay-slide',
+      overlayParentElement: 'html',
+      transition: function (url) {
+        window.location.href = url;
+      }
+    });
+  
+  
+  })(jQuery);  </script>
+
+</body>
+
+</html>
+<!-- end document-->
